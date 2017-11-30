@@ -23,8 +23,8 @@ TODO: add release `.deb` for armhf
 # This only needs to be run once
 docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-docker run --rm -ti ochafik/rpi-raspbian-bazel
-# bazel is in the PATH!
+docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
+# bazel is in the PATH of this container, enjoy!
 ```
 
 # Re-building the Raspberry Pi image:
