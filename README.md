@@ -61,7 +61,7 @@ sudo apt-get autoremove
 sudo apt-get clean
 ```
 
-Now download my script and convince yourself it's safe:
+Now download my [script](./build_from_scratch.sh) and convince yourself it's safe:
 - It clones [ochafik/bazel](https://github.com/ochafik/bazel)
   (my fork of [bazelbuild/bazel](https://github.com/bazelbuild/bazel))
 - Either your trust me, or you can fork my fork, check it doesn't contain dodgy
