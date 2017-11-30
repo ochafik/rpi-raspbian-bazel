@@ -4,7 +4,7 @@
 # First, use a full image to build protoc, protoc-gen-grpc-java and bazel.
 FROM resin/rpi-raspbian:stretch as builder
 RUN apt-get update && \
-  apt-get install -y automake g++ libtool make curl git unzip wget zip && \
+  apt-get install -y automake g++ libtool make curl git unzip wget zip openjdk-8-jdk && \
   cd / && \
   git clone https://github.com/ochafik/bazel.git -b from-scratch --depth=1 && \
   cd /bazel/third_party/protobuf/3.4.0 && \
