@@ -20,7 +20,7 @@ pushd third_party/grpc/compiler/src/java_plugin/cpp
     -L/usr/local/lib \
     -w -O2 -export-dynamic \
     *.cpp -o protoc-gen-grpc-java \
-  -lprotobuf -lprotoc
+    -lprotobuf -lprotoc -lstdc++
   export GRPC_JAVA_PLUGIN="$PWD/protoc-gen-grpc-java"
 popd
 
