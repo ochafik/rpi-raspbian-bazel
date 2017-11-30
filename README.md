@@ -34,12 +34,11 @@ If you're debugging things, you might just want to distill the commands from
 
 ```bash
 # From the git repo root
-docker run --rm -it -v `pwd`:/bazel -w `pwd` resin/rpi-raspbian:stretch /bin/bash
+docker run --rm -it -v `pwd`:/bazel -w `pwd` debian:stable /bin/bash
 # cd /bazel
 ```
 
-And if you want to test the `Dockerfile` itself, just retarget it for `debian`
-as follows:
+And if you want to test the `Dockerfile` itself:
 
 ```bash
 cat Dockerfile | \
