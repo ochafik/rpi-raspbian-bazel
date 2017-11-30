@@ -67,11 +67,9 @@ If you're debugging things, you might just want to distill the commands from
 docker run --rm -it resin/rpi-raspbian:stretch /bin/bash
 ```
 
-And if you want to test the `Dockerfile` itself faster, retarget it to some
-image that does not require QEMU:
+And if you want to test the `Dockerfile` itself faster on an image that does
+not require QEMU:
 
 ```bash
-cat Dockerfile | \
-  sed 's/resin\/rpi-raspbian:stretch/debian:stable/g' | \
-  docker build -t debian-bazel -
+docker build -t debian-bazel -f Dockerfile.debian .
 ```
