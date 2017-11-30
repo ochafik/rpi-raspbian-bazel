@@ -7,7 +7,7 @@ ADD build_from_scratch.sh /
 
 RUN apt-get update
 
-# Needed for apt-key
+# Needed for apt-key on the debian:stretch image.
 RUN apt-get install -y gnupg
 
 # Note: installs Oracle's JDK8, as the OpenJDK crashes in QEMU during the build.

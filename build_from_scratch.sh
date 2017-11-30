@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Builds Bazel from scratch in $PWD/bazel/output/bazel.
+# (tested on Raspbian & Debian with Bazel 0.8.0)
+#
+# Prerequisites:
+#   automake g++ libtool make curl git oracle-java8-jdk python unzip wget zip
+#
 set -eux
 
 git clone https://github.com/ochafik/bazel.git -b from-scratch --depth=1
