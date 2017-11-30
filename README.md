@@ -1,4 +1,4 @@
-# Bazel on Raspbian
+# Bazel on Raspbian [![Debian Build Status](https://travis-ci.org/ochafik/rpi-raspbian-bazel.svg?branch=master)](https://travis-ci.org/ochafik/rpi-raspbian-bazel)
 
 **WORK IN PROGRESS**: haven't deployed binaries nor docker images yet.
 
