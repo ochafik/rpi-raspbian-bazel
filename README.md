@@ -45,7 +45,40 @@ docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
 # bazel is in the PATH of this container, enjoy!
 ```
 
-# Re-building the Raspberry Pi image:
+# Building Bazel
+
+## From sources on a Raspberry Pi
+
+Prerequisite: you'll need a large SD card, and the following packages (assumes
+you already have an Oracle JDK8 installed, as is the case on NOOBS distros,
+otherwise try `sudo apt-get install default-jdk`):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y automake g++ libtool make curl git python unzip wget zip
+# Reclaim as much space as we can: we'll need it.
+sudo apt-get autoremove
+sudo apt-get clean
+```
+
+Now download my script and convince yourself it's safe:
+- It clones [ochafik/bazel](https://github.com/ochafik/bazel)
+  (my fork of [bazelbuild/bazel](https://github.com/bazelbuild/bazel))
+- Either your trust me, or you can fork my fork, check it doesn't contain dodgy
+  [diffs against the original repo](https://github.com/bazelbuild/bazel/compare/master...ochafik:from-scratch)
+  (assuming you trust the original, which I assume to be the case if you want to
+  use Bazel), edit the script to clone your fork instead (in case I sneakily
+  modified my fork after you scrutinized it), and proceed to the next command
+
+```bash
+wget https://raw.githubusercontent.com/ochafik/rpi-raspbian-bazel/master/build_from_scratch.sh
+# Do not trust scripts you download off the net!
+less build_from_scratch.sh
+
+bash build_from_scratch.sh
+```
+
+## Building the Raspberry Pi Docker image:
 
 We aim to publish images every now and then, but you may rebuild the image at 
 any time with the following command (*takes a while*):
@@ -57,7 +90,7 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 docker build -t rpi-raspbian-bazel .
 ```
 
-## Debugging
+### Debugging
 
 If you're debugging things, you might just want to distill the commands from 
 [Dockerfile](./Dockerfile) into some interactive container:
