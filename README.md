@@ -3,8 +3,7 @@
 ## On Docker
 
 In case you didn't know, you can run a Raspberry Pi (emulator) Docker container 
-on your desktop with little to no effort ([this post from resin.io]
-(https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/)
+on your desktop with little to no effort ([this post](https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/) on resin.io
 explains the magic they've written to pull this off).
 
 This repo builds a Bazel-ready Docker image based on
@@ -15,6 +14,7 @@ affiliation with).
 ## On a Raspberry Pi
 
 The plan is to also package the resulting `bazel` binary as a `.deb`.
+
 TODO: add release `.deb` for armhf
 
 # Usage
