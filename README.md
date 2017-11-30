@@ -55,7 +55,7 @@ docker build -t rpi-raspbian-bazel .
 ## Debugging
 
 If you're debugging things, you might just want to distill the commands from 
-[./Dockerfile] into some image that does not require QEMU:
+[Dockerfile](./Dockerfile) into some interactive container:
 
 ```bash
 # From the git repo root
