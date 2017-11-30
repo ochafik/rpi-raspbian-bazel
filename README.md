@@ -73,6 +73,5 @@ image that does not require QEMU:
 ```bash
 cat Dockerfile | \
   sed 's/resin\/rpi-raspbian:stretch/debian:stable/g' | \
-  sed 's/oracle-java8-jdk/openjdk-8-jdk/g' | \
   docker build -t debian-bazel -
 ```
