@@ -1,23 +1,20 @@
 # See README.md
 #
 # This is a multistaged build.
-# First, use a full raspbian image to build protoc, protoc-gen-grpc-java and bazel.
-# Assumes bazel build //:bazel-distfile.zip has been successfully run
+# First, use a full image to build protoc, protoc-gen-grpc-java and bazel.
 FROM resin/rpi-raspbian:stretch as builder
-WORKDIR /
 RUN apt-get update && \
   apt-get install -y automake g++ libtool make curl git unzip wget zip && \
+  cd / && \
   git clone https://github.com/ochafik/bazel.git -b from-scratch --depth=1 && \
-  cd bazel && \
-  pushd third_party/protobuf/3.4.0 && \
+  cd /bazel/third_party/protobuf/3.4.0 && \
     ./autogen.sh && \
     ./configure && \
     make && \
     make install && \
     ldconfig && \
-    export PROTOC=`which protoc` && \
-  popd && \
-  pushd third_party/grpc/compiler/src/java_plugin/cpp && \
+    export PROTOC=$(which protoc) && \
+  cd /bazel/third_party/grpc/compiler/src/java_plugin/cpp && \
     g++ \
       -I/usr/local/include \
       -L/usr/local/lib \
@@ -25,7 +22,7 @@ RUN apt-get update && \
       *.cpp -o protoc-gen-grpc-java \
       -lprotobuf -lprotoc && \
     export GRPC_JAVA_PLUGIN="$PWD/protoc-gen-grpc-java" && \
-  popd && \
+  cd /bazel && \
   bash ./compile.sh
 
 # Now simply extract the build artefact and sneak it into a slim image.
