@@ -1,0 +1,5 @@
+services:
+- docker
+script:
+- cat Dockerfile | sed 's/resin\/rpi-raspbian:stretch/debian:stretch/' > Dockerfile.debian
+- docker build -t debian-bazel-build -f Dockerfile.debian .

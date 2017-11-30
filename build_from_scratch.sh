@@ -21,12 +21,11 @@ pushd third_party/protobuf/3.4.0
 popd
 
 pushd third_party/grpc/compiler/src/java_plugin/cpp
-  g++ \
+  g++ -std=c++11 \
     -I$PROTOC_DIST/include \
     -w -O2 -export-dynamic \
-    *.cpp -o protoc-gen-grpc-java \
-    $PROTOC_DIST/lib/libproto{c,buf}.a
-    -lstdc++
+    *.cpp $PROTOC_DIST/lib/libproto{c,buf}.a \
+    -o protoc-gen-grpc-java
   export GRPC_JAVA_PLUGIN=$PWD/protoc-gen-grpc-java
 popd
 
