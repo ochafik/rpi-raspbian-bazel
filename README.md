@@ -1,8 +1,13 @@
 # Bazel on Raspbian
 
 Bazel is a Open-Source build tool from Google, which is used to build projects
-such as TensorFlow. Which is potentially so cool (if a bit slow) to use on your
-shiny Raspberry Pi 3!
+such as [TensorFlow](https://www.tensorflow.org/). Which is potentially awesome
+(if only a bit slow) to use on your shiny new
+[Raspberry Pi 3](https://www.raspberrypi.org/) (which one of
+[these research models](https://github.com/tensorflow/models/tree/master/research)
+ will be the most useful to your next maker project?).
+
+## Why it's not trivial
 
 Unfortunately, Raspbian doesn't have (yet) a package for Bazel. And Bazel
 doesn't provide (yet) a binary for armhf. And their instructions to build from
