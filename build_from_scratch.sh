@@ -8,7 +8,7 @@
 #
 set -eux
 
-git clone https://github.com/ochafik/bazel.git -b from-scratch --depth=1
+git clone https://github.com/ochafik/bazel.git -b build-from-scratch --depth=1
 cd bazel
 
 pushd third_party/protobuf/3.4.0
