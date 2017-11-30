@@ -15,8 +15,8 @@ Unfortunately, Raspbian doesn't have (yet) a package for Bazel. And Bazel
 doesn't provide (yet) a binary for armhf. And their instructions to build from
 source either implies you have a binary (which we don't) or that you battle with
 compilation errors. Which I did in
-[ochafik/bazel](https://github.com/ochafik/bazel/tree/from-scratch) (hopefully
-to be merged back into the original repo), and here I'm using it to build...
+[ochafik/bazel](https://github.com/ochafik/bazel/tree/build-from-scratch) (hopefully
+to be pulled back into the original repo), and here I'm using it to build...
 
 ## A Docker image to run Raspbian w/ Bazel on your Desktop
 
@@ -51,38 +51,30 @@ docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
 
 ## From sources on a Raspberry Pi
 
-Prerequisite: you'll need a large SD card, and the following packages (assumes
-you already have an Oracle JDK8 installed, as is the case on NOOBS distros,
-otherwise try `sudo apt-get install default-jdk`):
+Prerequisite: you'll need a large SD card, and the following packages:
 
 ```bash
 sudo apt-get update
 sudo apt-get install -y automake g++ libtool make curl git python unzip wget zip
+sudo apt-get install -y oracle-java8-installer oracle-java8-set-default
+
 # Reclaim as much space as we can: we'll need it.
 sudo apt-get autoremove
 sudo apt-get clean
 ```
 
-Now download my [script](./build_from_scratch.sh) and convince yourself it's safe:
-- It clones [ochafik/bazel](https://github.com/ochafik/bazel)
-  (my fork of [bazelbuild/bazel](https://github.com/bazelbuild/bazel))
-- Either your trust me, or you can fork my fork, check it doesn't contain dodgy
-  [diffs against the original repo](https://github.com/bazelbuild/bazel/compare/master...ochafik:from-scratch)
-  (assuming you trust the original, which I assume to be the case if you want to
-  use Bazel), edit the script to clone your fork instead (in case I sneakily
-  modified my fork after you scrutinized it), and proceed to the next command
+Clone [ochafik/bazel](https://github.com/ochafik/bazel) (my fork of
+[bazelbuild/bazel](https://github.com/bazelbuild/bazel)) and build it:
 
 ```bash
-wget https://raw.githubusercontent.com/ochafik/rpi-raspbian-bazel/master/build_from_scratch.sh
-# Do not trust scripts you download off the net!
-less build_from_scratch.sh
-
-bash build_from_scratch.sh
+git clone https://github.com/ochafik/bazel -b build-from-scratch --depth=1
+cd bazel
+bash ./compile.sh
 ```
 
 ## Building the Raspberry Pi Docker image:
 
-We aim to publish images every now and then, but you may rebuild the image at 
+I aim to publish images to docker hub soon, but you may rebuild the image at 
 any time with the following command (*takes a while*):
 
 ```bash
@@ -106,5 +98,6 @@ And if you want to test the `Dockerfile` itself faster on an image that does
 not require QEMU:
 
 ```bash
-docker build -t debian-bazel -f Dockerfile.debian .
+cat Dockerfile | sed 's/resin\/rpi-raspbian:stretch/debian:stretch/' > Dockerfile.debian
+docker build -t debian-bazel-build -f Dockerfile.debian .
 ```

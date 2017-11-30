@@ -1,7 +1,5 @@
 # See README.md
 FROM resin/rpi-raspbian:stretch
-ADD build_from_scratch.sh /
-
 RUN apt-get update
 
 # Needed for apt-key on the debian:stretch image.
@@ -20,4 +18,7 @@ RUN apt-get install -y automake g++ libtool make curl git python unzip wget zip 
   apt-get autoremove && \
   apt-get clean
 
-RUN cd / && bash ./build_from_scratch.sh
+RUN cd / && \
+  git clone https://github.com/ochafik/bazel.git -b build-from-scratch --depth=1 && \
+  cd bazel && \
+  VERBOSE=yes bash ./compile.sh
