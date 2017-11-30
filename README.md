@@ -33,7 +33,7 @@ and...
 
 The plan is to also package the resulting `bazel` binary as a `.deb`.
 
-TODO: add release `.deb` for armhf
+TODO: add release binary for armhf to the repo
 
 # Usage
 
