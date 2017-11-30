@@ -1,6 +1,6 @@
 # Bazel on Raspbian
 
-Bazel is a Open-Source build tool from Google, which is used to build projects
+[Bazel](https://bazel.build/) is a Open-Source build tool from Google, which is used to build projects
 such as [TensorFlow](https://www.tensorflow.org/). Which is potentially awesome
 (if only a bit slow) to use on your shiny new
 [Raspberry Pi 3](https://www.raspberrypi.org/) (which one of
