@@ -1,5 +1,7 @@
 # Bazel on Raspbian
 
+**WORK IN PROGRESS**: haven't deployed binaries nor docker images yet.
+
 [Bazel](https://bazel.build/) is a Open-Source build tool from Google, which is used to build projects
 such as [TensorFlow](https://www.tensorflow.org/). Which is potentially awesome
 (if only a bit slow) to use on your shiny new
