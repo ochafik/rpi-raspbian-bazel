@@ -1,9 +1,9 @@
-# Bazel on Raspian
+# Bazel on Raspbian
 
 This is an off-the-shelf Bazel-ready Docker image based on
 [resin/rpi-raspbian](https://hub.docker.com/r/resin/rpi-raspbian/)
-(which is managed by [resin.io](https://resin.io), with whom I have no
-affiliation).
+(which is managed by [resin.io](https://resin.io) whom I have no
+affiliation with).
 
 # Usage
 
