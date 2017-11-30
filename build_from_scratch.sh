@@ -10,7 +10,7 @@ pushd third_party/protobuf/3.4.0
   make
   # TODO(ochafik): do without this (how to link protoc-gen-grpc-java below?)
   sudo make install
-  ldconfig
+  sudo ldconfig
   export PROTOC=$(which protoc)
 popd
 
