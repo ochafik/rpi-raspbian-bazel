@@ -56,5 +56,5 @@ image that does not require QEMU:
 ```bash
 cat Dockerfile | \
   sed 's/resin\/rpi-raspbian:stretch/debian:stable/g' | \
-  docker build -t rpi-raspbian-bazel-debian -
+  docker build -t debian-bazel -
 ```
