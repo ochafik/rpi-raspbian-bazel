@@ -3,6 +3,17 @@
 *TL;DR* Install bazel on your Raspberry Pi 3 w/ Raspbian "stretch" with:
 ```bash
 wget https://github.com/ochafik/rpi-raspbian-bazel/releases/download/bazel-raspbian-armv7l-0.8.0-20171130/bazel
+./bazel
+```
+Gives:
+```
+Extracting Bazel installation...
+Usage: bazel <command> <options> ...
+
+Available commands:
+  analyze-profile     Analyzes build profile data.
+  build               Builds the specified targets.
+...
 ```
 
 [Bazel](https://bazel.build/) is a Open-Source build tool from Google, which is used to build projects
