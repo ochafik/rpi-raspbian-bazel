@@ -79,7 +79,7 @@ sudo apt-get autoremove
 sudo apt-get clean
 ```
 
-Clone [ochafik/bazel](https://github.com/ochafik/bazel) (my fork of
+Clone [ochafik/bazel](https://github.com/ochafik/bazel/tree/build-from-scratch) (my fork of
 [bazelbuild/bazel](https://github.com/bazelbuild/bazel)) and build it:
 
 ```bash
