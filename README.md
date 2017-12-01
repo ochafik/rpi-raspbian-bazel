@@ -3,6 +3,7 @@
 *TL;DR* Install bazel on your Raspberry Pi 3 w/ Raspbian "stretch" with:
 ```bash
 wget https://github.com/ochafik/rpi-raspbian-bazel/releases/download/bazel-raspbian-armv7l-0.8.0-20171130/bazel
+chmod +x ./bazel
 ./bazel
 ```
 Gives:
@@ -59,6 +60,7 @@ Download a prebuilt-image:
 ```bash
 mkdir ~/bin && echo 'export PATH=$PATH:$HOME/bin' >> ~/.profile
 wget -o ~/bin/bazel https://github.com/ochafik/rpi-raspbian-bazel/releases/download/bazel-raspbian-armv7l-0.8.0-20171130/bazel
+chmod +x ~/bin/bazel
 ```
 Bazel will extract its files on the first run:
 ```
