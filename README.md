@@ -1,6 +1,9 @@
 # Bazel on Raspbian [![Debian Build Status](https://travis-ci.org/ochafik/rpi-raspbian-bazel.svg?branch=master)](https://travis-ci.org/ochafik/rpi-raspbian-bazel)
 
-**WORK IN PROGRESS**: haven't deployed binaries nor docker images yet.
+*TL;DR* Install bazel on your Raspberry Pi 3 w/ Raspbian "stretch" with:
+```bash
+wget https://github.com/ochafik/rpi-raspbian-bazel/releases/download/bazel-raspbian-armv7l-0.8.0-20171130/bazel
+```
 
 [Bazel](https://bazel.build/) is a Open-Source build tool from Google, which is used to build projects
 such as [TensorFlow](https://www.tensorflow.org/). Which is potentially awesome
@@ -33,25 +36,27 @@ and...
 
 ## Raspberry Pi binaries
 
-The plan is to also package the resulting `bazel` binary as a `.deb`.
+I've published a [pre-built binary of Bazel ~0.8.0 in the releases section of this repo](https://github.com/ochafik/rpi-raspbian-bazel/releases).
 
-TODO: add release binary for armhf to the repo
+**Use at your own risk, for what I know hackers may have hijacked my Pi and planted viruses in my GCC before I compile this release.**
 
 # Usage
 
+Download a prebuilt-image:
 ```bash
-# This only needs to be run once
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
-
-docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
-# bazel is in the PATH of this container, enjoy!
+mkdir ~/bin && echo 'export PATH=$PATH:$HOME/bin' >> ~/.profile
+wget -o ~/bin/bazel https://github.com/ochafik/rpi-raspbian-bazel/releases/download/bazel-raspbian-armv7l-0.8.0-20171130/bazel
+```
+Bazel will extract its files on the first run:
+```
+bazel
 ```
 
 # Building Bazel
 
 ## From sources on a Raspberry Pi
 
-Prerequisite: you'll need a large SD card, and the following packages:
+Prerequisite: you'll need a large SD card (8GB at least), and the following packages:
 
 ```bash
 sudo apt-get update
@@ -72,6 +77,16 @@ cd bazel
 bash ./compile.sh
 ```
 
+# Docker usage (WIP)
+
+```bash
+# This only needs to be run once
+docker run --rm --privileged multiarch/qemu-user-static:register --reset
+
+docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
+# bazel is in the PATH of this container, enjoy!
+```
+
 ## Building the Raspberry Pi Docker image:
 
 I aim to publish images to docker hub soon, but you may rebuild the image at 
@@ -84,7 +99,7 @@ docker run --rm --privileged multiarch/qemu-user-static:register --reset
 docker build -t rpi-raspbian-bazel .
 ```
 
-### Debugging
+### Debugging it
 
 If you're debugging things, you might just want to distill the commands from 
 [Dockerfile](./Dockerfile) into some interactive container:
