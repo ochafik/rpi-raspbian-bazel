@@ -32,6 +32,8 @@ compilation errors. Which I did in
 [ochafik/bazel](https://github.com/ochafik/bazel/tree/build-from-scratch) (hopefully
 to be pulled back into the original repo), and here I'm using it to build...
 
+Credits: I've spent time absorbing https://github.com/samjabrahams/tensorflow-on-raspberry-pi, which was a great resource / inspiration (although the hurdles they went through were probably for an earlier version of Bazel, so I had to fight my own).
+
 ## A Docker image to run Raspbian w/ Bazel on your Desktop
 
 In case you didn't know, you can run a Raspberry Pi (emulator) Docker container 
