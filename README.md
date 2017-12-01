@@ -24,29 +24,22 @@ such as [TensorFlow](https://www.tensorflow.org/). Which is potentially awesome
 [these research models](https://github.com/tensorflow/models/tree/master/research)
  will be the most useful to your next maker project?).
 
-## Why it's not trivial
+## The problem...
+
+Edit: as pointed out in [this PR](https://github.com/bazelbuild/bazel/pull/4199#issuecomment-348571809), Bazel releases have a "distribution" `-dist.zip` archive zip that contains pregenerated Java artefacts for its proto files (which I overlooked in the [doc](https://docs.bazel.build/versions/master/install-compile-source.html)).
+
+The problem I tried to solve is to build from the git tree, not from the distribution zip (which makes it much easier).
+
+Credits: I've spent time absorbing https://github.com/samjabrahams/tensorflow-on-raspberry-pi, who tried to solve the same issue + build Tensorflow on the Pi, but probably for an earlier version of Bazel.
 
 Unfortunately, Raspbian doesn't have (yet) a package for Bazel. And Bazel
 doesn't provide (yet) a binary for armhf. And their instructions to build from
-source either implies you have a binary (which we don't) or that you battle with
-compilation errors. Which I did in
+source requires you use their distribution archive, ruling out git source tree 
+as the _"archive contains generated files in addition to the versioned sources, so this step cannot be short cut by checking out the source tree."_.
+
+I tried to prove this assumption wrong in
 [ochafik/bazel](https://github.com/ochafik/bazel/tree/build-from-scratch) (hopefully
 to be pulled back into the original repo), and here I'm using it to build...
-
-Credits: I've spent time absorbing https://github.com/samjabrahams/tensorflow-on-raspberry-pi, which was a great resource / inspiration (although the hurdles they went through were probably for an earlier version of Bazel, so I had to fight my own).
-
-## A Docker image to run Raspbian w/ Bazel on your Desktop
-
-In case you didn't know, you can run a Raspberry Pi (emulator) Docker container 
-on your desktop with little to no effort ([this post](https://resin.io/blog/building-arm-containers-on-any-x86-machine-even-dockerhub/) on resin.io
-explains the magic they've written to pull this off).
-
-This repo builds a Bazel-ready Docker image based on
-[resin/rpi-raspbian](https://hub.docker.com/r/resin/rpi-raspbian/)
-(which is managed by [resin.io](https://resin.io) whom I have no
-affiliation with).
-
-and...
 
 ## Raspberry Pi binaries
 
@@ -90,44 +83,4 @@ Clone [ochafik/bazel](https://github.com/ochafik/bazel/tree/build-from-scratch) 
 git clone https://github.com/ochafik/bazel -b build-from-scratch --depth=1
 cd bazel
 bash ./compile.sh
-```
-
-# Docker usage (WIP)
-
-```bash
-# This only needs to be run once
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
-
-docker run --rm -ti ochafik/rpi-raspbian-bazel /bin/bash
-# bazel is in the PATH of this container, enjoy!
-```
-
-## Building the Raspberry Pi Docker image:
-
-I aim to publish images to docker hub soon, but you may rebuild the image at 
-any time with the following command (*takes a while*):
-
-```bash
-# This only needs to be run once
-docker run --rm --privileged multiarch/qemu-user-static:register --reset
-
-docker build -t rpi-raspbian-bazel .
-```
-
-### Debugging it
-
-If you're debugging things, you might just want to distill the commands from 
-[Dockerfile](./Dockerfile) into some interactive container:
-
-```bash
-# From the git repo root
-docker run --rm -it resin/rpi-raspbian:stretch /bin/bash
-```
-
-And if you want to test the `Dockerfile` itself faster on an image that does
-not require QEMU:
-
-```bash
-cat Dockerfile | sed 's/resin\/rpi-raspbian:stretch/debian:stretch/' > Dockerfile.debian
-docker build -t debian-bazel-build -f Dockerfile.debian .
 ```
